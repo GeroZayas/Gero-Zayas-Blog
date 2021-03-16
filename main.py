@@ -9,9 +9,12 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import LoginForm, RegisterForm, CreatePostForm, CommentForm
 from flask_gravatar import Gravatar
+import os
+
+# NOTICE I'm importing os, and then using os.environ for the env variables I'm protecting here
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = b'\xadzW\xea\xc6/\xf0z\xe7\x19\x1f\xa4c\xad\x9f^'
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 ckeditor = CKEditor(app)
 Bootstrap(app)
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False,
